@@ -58,3 +58,8 @@ jobs:
           tags: aymanwageah/my-app:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Trigger Render Deployment
+        if: github.ref == 'refs/heads/main'
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
